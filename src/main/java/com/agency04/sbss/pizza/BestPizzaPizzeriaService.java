@@ -1,22 +1,27 @@
 package com.agency04.sbss.pizza;
 
-import org.springframework.beans.factory.annotation.Value;
-
 /**
  * Class represents BestPizza Pizzeria Service.
  */
 public class BestPizzaPizzeriaService implements  PizzeriaService{
 
-    @Value("BestPizza")
-    private String name;
-
-    @Value("Unska 3")
+    private String namePizzeria;
     private String address;
 
 
     @Override
+    public void setName(String namePizzeria) {
+        this.namePizzeria = namePizzeria;
+    }
+
+    @Override
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Override
     public String getName() {
-        return this.name;
+        return this.namePizzeria;
     }
 
     @Override

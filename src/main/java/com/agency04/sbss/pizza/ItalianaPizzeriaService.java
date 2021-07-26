@@ -7,16 +7,24 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class ItalianaPizzeriaService implements  PizzeriaService{
 
-    @Value("${name.pizzeria}")
-    private String name;
 
-    @Value("${address.pizzeria}")
+    private String namePizzeria;
     private String address;
 
 
     @Override
+    public void setName(String namePizzeria) {
+        this.namePizzeria = namePizzeria;
+    }
+
+    @Override
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Override
     public String getName() {
-        return this.name;
+        return this.namePizzeria;
     }
 
     @Override
