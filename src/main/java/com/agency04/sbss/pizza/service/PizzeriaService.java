@@ -1,4 +1,6 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.service;
+
+import com.agency04.sbss.pizza.model.Pizza;
 
 /**
  * Interface that represents Pizzeria Service.
@@ -15,14 +17,14 @@ public interface PizzeriaService {
      */
     public void setAddress(String address);
     /**
-     * Method that return name of Pizzeria Service.
+     * Method returns the name of Pizzeria Service.
      * @return name of Pizzeria Service.
      */
 
     public String getName();
 
     /**
-     * Method that returns address of Pizzeria Service.
+     * Method returns the address of Pizzeria Service.
      * @return address od Pizzeria Service.
      */
     public String getAddress();

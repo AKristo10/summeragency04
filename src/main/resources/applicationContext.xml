@@ -7,24 +7,12 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-	
-    <!-- Define your beans here -->
-    <bean id="PizzaDelivery"
-          class="com.agency04.sbss.pizza.PizzaDeliveryService">
-    </bean>
-    <bean id="PizzeriaBest"
-          class="com.agency04.sbss.pizza.BestPizzaPizzeriaService">
-        <property name="name" value="Best Pizza"></property>
-        <property name="address" value="Unska 3"></property>
-    </bean>
-    <bean id="PizzeriaItaliana"
-          class="com.agency04.sbss.pizza.ItalianaPizzeriaService">
-        <property name="name" value="${name.pizzeria}"></property>
-        <property name="address" value="${address.pizzeria}"></property>
-    </bean>
-    <!-- define the dependency -->
-
+    <!-- add entry to enable component scanning -->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.agency04.sbss.pizza" />
     <context:property-placeholder location="classpath:application.properties"/>
+
+
 
 </beans>
 

@@ -1,19 +1,31 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.model;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Class that represent Marinara pizza.
  */
+@Component
 public class MarinaraPizza implements Pizza {
 
+    @Value("Marinara Pizza")
+    private String name;
+    /**
+     * Method return name of Pizza
+     * @return name of Pizza
+     */
     @Override
     public String getName() {
-        return "Marinara Pizza";
+        return name;
     }
 
+
+    /**
+     * Method returns ingredients of pizza
+     * @return ingredients of pizza
+     */
     @Override
     public HashSet<PizzaIngredient> getIngredients() {
         HashSet<PizzaIngredient> ingredients = new HashSet<PizzaIngredient>();

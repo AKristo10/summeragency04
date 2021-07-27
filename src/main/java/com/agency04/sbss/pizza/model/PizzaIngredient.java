@@ -1,4 +1,4 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.model;
 
 /**
  * Ingredients that can be used.

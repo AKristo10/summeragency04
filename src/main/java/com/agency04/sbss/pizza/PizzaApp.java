@@ -1,8 +1,8 @@
 package com.agency04.sbss.pizza;
 
+import com.agency04.sbss.pizza.model.MarinaraPizza;
+import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.nio.file.Path;
 
 /**
  * Main class for Pizza application
@@ -15,23 +15,11 @@ public class PizzaApp {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        PizzaDeliveryService deliveryService = context.getBean("PizzaDelivery", PizzaDeliveryService.class);
-        Pizza pizza = new MarinaraPizza();
-        deliveryService.setPizzeriaService(new BestPizzaPizzeriaService());
-        System.out.println(deliveryService.orderPizza(pizza));
+        PizzaDeliveryService deliveryService = context.getBean("pizzaDeliveryService", PizzaDeliveryService.class);
 
-        PizzeriaService bestPS = context.getBean("PizzeriaBest", PizzeriaService.class);
-        System.out.println(bestPS.getName());
+        System.out.println(deliveryService.orderPizza(new MarinaraPizza()));
 
-        PizzeriaService italianaPS = context.getBean("PizzeriaItaliana", PizzeriaService.class);
-        System.out.println(italianaPS.getName());
-
-
-
-
-
-
-
+        context.close();
 
     }
 

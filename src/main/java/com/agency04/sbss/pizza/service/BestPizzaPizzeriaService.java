@@ -1,13 +1,20 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.service;
+
+import com.agency04.sbss.pizza.model.Pizza;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * Class represents BestPizza Pizzeria Service.
  */
-public class BestPizzaPizzeriaService implements  PizzeriaService{
+@Component
+public class BestPizzaPizzeriaService implements PizzeriaService {
 
+    @Value("Best Pizza")
     private String namePizzeria;
-    private String address;
 
+    @Value("Unska 3")
+    private String address;
 
     @Override
     public void setName(String namePizzeria) {
