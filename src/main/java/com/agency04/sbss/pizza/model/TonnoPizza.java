@@ -40,4 +40,15 @@ public class TonnoPizza implements Pizza {
         ingredients.add(PizzaIngredient.TUNA);
         return ingredients;
     }
+
+    @Override
+    public void startStuffs() {
+        //which data to initialize??????
+        System.out.println("Post-Construct method");
+    }
+
+    @Override
+    public void endStuffs() {
+        System.out.println("Pre-destroy method");
+    }
 }
