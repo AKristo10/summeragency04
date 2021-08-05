@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class PizzaDeliveryService {
 
-    private PizzeriaService pizzeriaService;
+    public PizzeriaService pizzeriaService;
 
     /**
      * Set the value of pizzeria service
      * @param thepizzeriaService
      */
     @Autowired
-    @Qualifier("italianaPizzeriaService")
+    @Qualifier("bestPizzaPizzeriaService")
     public void setPizzeriaService(PizzeriaService thepizzeriaService) {
         this.pizzeriaService = thepizzeriaService;
     }
@@ -31,6 +31,7 @@ public class PizzaDeliveryService {
      * @return
      */
     public String orderPizza(Pizza pizza){
-       return this.pizzeriaService.getName() + " is making pizza. Yummy :)";
+        System.out.println(pizzeriaService.getName());
+       return pizza.getName()  + " is in your order. Yummy :). Ingredients: " + pizza.getIngredients().toString() + " ";
     }
 }

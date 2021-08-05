@@ -14,6 +14,11 @@ public class TonnoPizza implements Pizza {
     @Value("Tono Pizza")
     private  String name;
 
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
     /**
      * Method return the name of Pizza
      * @return the name of Pizza

@@ -9,14 +9,19 @@ import java.util.HashSet;
 public interface Pizza {
 
     /**
+     * Method set the name of the Pizza.
+     */
+    void setName(String name);
+
+    /**
      * Method that return name of Pizza.
      * @return name of Pizza
      */
-    public String getName();
+     String getName();
 
     /**
      * Method that return ingredients of Pizza.
      * @return ingredients of Pizza.
      */
-    public HashSet<PizzaIngredient> getIngredients();
+     HashSet<PizzaIngredient> getIngredients();
 }

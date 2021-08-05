@@ -10,28 +10,28 @@ public interface PizzeriaService {
     /**
      * Method that set the name of Pizzeria Service
      */
-    public void setName(String namePizzeria);
+     void setName(String namePizzeria);
 
     /**
      * Method that set the address of Pizzeria Service
      */
-    public void setAddress(String address);
+     void setAddress(String address);
     /**
      * Method returns the name of Pizzeria Service.
      * @return name of Pizzeria Service.
      */
 
-    public String getName();
+     String getName();
 
     /**
      * Method returns the address of Pizzeria Service.
      * @return address od Pizzeria Service.
      */
-    public String getAddress();
+     String getAddress();
 
     /**
      * Method that represents making Pizza.
      * @param pizza
      */
-    public String makePizza(Pizza pizza);
+     String makePizza(Pizza pizza);
 }
