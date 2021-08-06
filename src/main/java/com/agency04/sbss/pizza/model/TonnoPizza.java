@@ -12,7 +12,7 @@ import java.util.HashSet;
 public class TonnoPizza implements Pizza {
 
     @Value("Tono Pizza")
-    private  String name;
+    private String name;
 
     @Override
     public void setName(String name) {
@@ -21,6 +21,7 @@ public class TonnoPizza implements Pizza {
 
     /**
      * Method return the name of Pizza
+     *
      * @return the name of Pizza
      */
     @Override
@@ -30,11 +31,12 @@ public class TonnoPizza implements Pizza {
 
     /**
      * Method returns ingredients of Pizza.
+     *
      * @return set of ingredients of Pizza
      */
     @Override
     public HashSet<PizzaIngredient> getIngredients() {
-        HashSet<PizzaIngredient> ingredients = new HashSet<PizzaIngredient>();
+        HashSet<PizzaIngredient> ingredients = new HashSet<>();
         ingredients.add(PizzaIngredient.TOMATO_SOUCE);
         ingredients.add(PizzaIngredient.GARLIC);
         ingredients.add(PizzaIngredient.TUNA);

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Represents Pizza Delivery Service
+ *
  * @author Andrea
  */
 @Component
@@ -16,6 +17,7 @@ public class PizzaDeliveryService {
 
     /**
      * Set the value of pizzeria service
+     *
      * @param thepizzeriaService
      */
     @Autowired
@@ -27,11 +29,12 @@ public class PizzaDeliveryService {
 
     /**
      * Method for ordering pizza.
+     *
      * @param pizza sort of pizza for order
      * @return
      */
-    public String orderPizza(Pizza pizza){
+    public String orderPizza(Pizza pizza) {
         System.out.println(pizzeriaService.getName());
-       return pizza.getName()  + " is in your order. Yummy :). Ingredients: " + pizza.getIngredients().toString() + " ";
+        return pizza.getName() + " is in your order. Yummy :). Ingredients: " + pizza.getIngredients().toString() + " ";
     }
 }

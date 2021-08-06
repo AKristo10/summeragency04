@@ -38,6 +38,6 @@ public class BestPizzaPizzeriaService implements PizzeriaService {
 
     @Override
     public String makePizza(Pizza pizza) {
-        return  "Making pizza";
+        return "Making pizza";
     }
 }

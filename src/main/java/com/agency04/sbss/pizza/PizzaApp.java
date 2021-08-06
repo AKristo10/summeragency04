@@ -22,7 +22,6 @@ public class PizzaApp {
         System.out.println(deliveryService.orderPizza(context.getBean("tonnoPizza", Pizza.class)));
 
         context.close();
-
     }
 
 }

@@ -1,6 +1,8 @@
 package com.agency04.sbss.pizza.model;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import java.util.HashSet;
 
 /**
@@ -19,6 +21,7 @@ public class MarinaraPizza implements Pizza {
 
     /**
      * Method return name of Pizza
+     *
      * @return name of Pizza
      */
     @Override
@@ -29,6 +32,7 @@ public class MarinaraPizza implements Pizza {
 
     /**
      * Method returns ingredients of pizza
+     *
      * @return ingredients of pizza
      */
     @Override
