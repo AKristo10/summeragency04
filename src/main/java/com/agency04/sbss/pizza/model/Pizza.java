@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 /**
  * Interface that define a simple Pizza.
+ *
  * @author Andrea
  */
 public interface Pizza {
@@ -15,15 +16,17 @@ public interface Pizza {
 
     /**
      * Method that return name of Pizza.
+     *
      * @return name of Pizza
      */
-     String getName();
+    String getName();
 
     /**
      * Method that return ingredients of Pizza.
+     *
      * @return ingredients of Pizza.
      */
-     HashSet<PizzaIngredient> getIngredients();
+    HashSet<PizzaIngredient> getIngredients();
 
     /**
      * Method executes before creating the object, initialize data and print to console

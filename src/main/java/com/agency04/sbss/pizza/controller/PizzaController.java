@@ -4,7 +4,6 @@ import com.agency04.sbss.pizza.PizzaConfig;
 import com.agency04.sbss.pizza.model.Pizza;
 import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
