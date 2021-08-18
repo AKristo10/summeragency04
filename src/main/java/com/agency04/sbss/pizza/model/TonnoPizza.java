@@ -1,7 +1,6 @@
 package com.agency04.sbss.pizza.model;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 
@@ -11,7 +10,7 @@ import java.util.HashSet;
 public class TonnoPizza implements Pizza {
 
     @Value("Tono Pizza")
-    private  String name;
+    private String name;
 
     @Override
     public void setName(String name) {
@@ -20,6 +19,7 @@ public class TonnoPizza implements Pizza {
 
     /**
      * Method return the name of Pizza
+     *
      * @return the name of Pizza
      */
     @Override
@@ -29,6 +29,7 @@ public class TonnoPizza implements Pizza {
 
     /**
      * Method returns ingredients of Pizza.
+     *
      * @return set of ingredients of Pizza
      */
     @Override

@@ -31,6 +31,7 @@ public class PizzaDeliveryService {
      * @return
      */
     public String orderPizza(Pizza pizza){
+        System.out.println("Ahoyyyyy andy ovo je " + pizzeriaService.getName());
        return pizza.getName()  + " is in your order. Yummy :). Ingredients: " + pizza.getIngredients().toString() + " ";
     }
 }

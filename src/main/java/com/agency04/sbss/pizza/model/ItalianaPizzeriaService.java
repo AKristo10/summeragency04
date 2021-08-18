@@ -9,13 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ItalianaPizzeriaService implements PizzeriaService {
 
-
     @Value("${name.pizzeria}")
     private String namePizzeria;
 
     @Value("${address.pizzeria}")
     private String address;
-
 
     @Override
     public void setName(String namePizzeria) {

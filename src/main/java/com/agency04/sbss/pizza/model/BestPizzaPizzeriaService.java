@@ -1,7 +1,6 @@
 package com.agency04.sbss.pizza.model;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 /**
  * Class represents BestPizza Pizzeria Service.
@@ -37,6 +36,6 @@ public class BestPizzaPizzeriaService implements PizzeriaService {
 
     @Override
     public String makePizza(Pizza pizza) {
-        return  "Making pizza";
+        return "Making pizza";
     }
 }
