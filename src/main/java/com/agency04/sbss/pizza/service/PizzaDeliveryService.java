@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
  * Represents Pizza Delivery Service
  * @author Andrea
  */
-@Component
 public class PizzaDeliveryService {
 
     public PizzeriaService pizzeriaService;

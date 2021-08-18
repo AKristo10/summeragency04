@@ -4,6 +4,7 @@ import com.agency04.sbss.pizza.model.MarinaraPizza;
 import com.agency04.sbss.pizza.model.TonnoPizza;
 import com.agency04.sbss.pizza.model.BestPizzaPizzeriaService;
 import com.agency04.sbss.pizza.model.ItalianaPizzeriaService;
+import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import org.springframework.context.annotation.*;
 
 @Configuration
@@ -12,12 +13,12 @@ import org.springframework.context.annotation.*;
 public class PizzaConfig {
 
     @Bean
-    @Primary
-    public ItalianaPizzeriaService italianaPizzeriaService(){
-        return new ItalianaPizzeriaService();
+    public PizzaDeliveryService pizzaDeliveryService(){
+        return new PizzaDeliveryService();
     }
 
     @Bean
+    @Primary
     public BestPizzaPizzeriaService bestPizzaPizzeriaService(){
         return  new BestPizzaPizzeriaService();
     }

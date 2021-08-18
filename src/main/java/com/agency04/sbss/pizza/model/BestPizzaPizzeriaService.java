@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * Class represents BestPizza Pizzeria Service.
  */
-@Component
+
 public class BestPizzaPizzeriaService implements PizzeriaService {
 
     @Value("Best Pizza")

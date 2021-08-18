@@ -8,7 +8,6 @@ import java.util.HashSet;
 /**
  * Class that represents tuna pizza
  */
-@Component
 public class TonnoPizza implements Pizza {
 
     @Value("Tono Pizza")
