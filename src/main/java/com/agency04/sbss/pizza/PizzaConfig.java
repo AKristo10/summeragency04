@@ -2,12 +2,12 @@ package com.agency04.sbss.pizza;
 
 import com.agency04.sbss.pizza.model.MarinaraPizza;
 import com.agency04.sbss.pizza.model.TonnoPizza;
-import com.agency04.sbss.pizza.service.BestPizzaPizzeriaService;
-import com.agency04.sbss.pizza.service.ItalianaPizzeriaService;
+import com.agency04.sbss.pizza.model.BestPizzaPizzeriaService;
+import com.agency04.sbss.pizza.model.ItalianaPizzeriaService;
 import org.springframework.context.annotation.*;
 
 @Configuration
-@ComponentScan("com.agency04.sbss.pizza")
+@ComponentScan("com.agency04.sbss.pizza.model")
 @PropertySource("classpath:application.properties")
 public class PizzaConfig {
 

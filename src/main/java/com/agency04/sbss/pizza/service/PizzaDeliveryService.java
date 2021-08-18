@@ -1,6 +1,7 @@
 package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.model.Pizza;
+import com.agency04.sbss.pizza.model.PizzeriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,7 @@ public class PizzaDeliveryService {
      * @return
      */
     public String orderPizza(Pizza pizza){
+        System.out.println("Ahoyyyyy andy ovo je " + pizzeriaService.getName());
        return pizza.getName()  + " is in your order. Yummy :). Ingredients: " + pizza.getIngredients().toString() + " ";
     }
 }
