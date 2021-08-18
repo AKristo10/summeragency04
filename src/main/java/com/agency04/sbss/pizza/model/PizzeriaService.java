@@ -10,6 +10,7 @@ public interface PizzeriaService {
     /**
      * Method that set the name of Pizzeria Service
      */
+
      void setName(String namePizzeria);
 
     /**
