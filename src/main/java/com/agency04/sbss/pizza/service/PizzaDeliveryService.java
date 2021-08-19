@@ -4,10 +4,10 @@ import com.agency04.sbss.pizza.model.Pizza;
 import com.agency04.sbss.pizza.model.PizzeriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 /**
  * Represents Pizza Delivery Service
- *
  * @author Andrea
  */
 public class PizzaDeliveryService {
@@ -16,7 +16,6 @@ public class PizzaDeliveryService {
 
     /**
      * Set the value of pizzeria service
-     *
      * @param thepizzeriaService
      */
     @Autowired
@@ -28,12 +27,10 @@ public class PizzaDeliveryService {
 
     /**
      * Method for ordering pizza.
-     *
      * @param pizza sort of pizza for order
      * @return
      */
-    public String orderPizza(Pizza pizza) {
-        System.out.println("Ahoyyyyy andy ovo je " + pizzeriaService.getName());
-        return pizza.getName() + " is in your order. Yummy :). Ingredients: " + pizza.getIngredients().toString() + " ";
+    public String orderPizza(Pizza pizza){
+       return pizza.getName()  + " is in your order. Yummy :). Ingredients: " + pizza.getIngredients().toString() + " ";
     }
 }
