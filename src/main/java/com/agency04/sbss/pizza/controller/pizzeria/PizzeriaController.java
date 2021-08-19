@@ -28,10 +28,13 @@ public class PizzeriaController {
     public String getMenu(){
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(PizzaConfig.class);
-        MarinaraPizza marinaraPizza = context.getBean("marinaraPizza", MarinaraPizza.class);
-        TonnoPizza tonnoPizza = context.getBean("tonnoPizza", TonnoPizza.class);
-        return "Available pizzas we can offer are: " + marinaraPizza.getName() + " -> size: " + marinaraPizza.getSize() + ", "+
-                tonnoPizza.getName() + " -> size: " + tonnoPizza.getSize();
+
+        PizzaDeliveryService deliveryService = context.getBean("pizzaDeliveryService", PizzaDeliveryService.class);
+        String menuString = "";
+        for(Pizza pizza : deliveryService.getPizzeriaService().getMenu()){
+            menuString += pizza.getName() + "\n";
+        }
+        return menuString;
     }
 
 

@@ -3,6 +3,9 @@ package com.agency04.sbss.pizza.model;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class represents Italiana Pizzeria Service.
  */
@@ -38,5 +41,12 @@ public class ItalianaPizzeriaService implements PizzeriaService {
     @Override
     public String makePizza(Pizza pizza) {
         return "Making pizza";
+    }
+
+    @Override
+    public List<Pizza> getMenu() {
+        List<Pizza> menu = new ArrayList<Pizza>();
+        menu.add(new TonnoPizza());
+        return menu;
     }
 }
