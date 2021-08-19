@@ -1,9 +1,7 @@
 package com.agency04.sbss.pizza.controller.pizzeria;
 
 import com.agency04.sbss.pizza.PizzaConfig;
-import com.agency04.sbss.pizza.model.MarinaraPizza;
 import com.agency04.sbss.pizza.model.Pizza;
-import com.agency04.sbss.pizza.model.TonnoPizza;
 import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
