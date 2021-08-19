@@ -34,7 +34,7 @@ public class TonnoPizza implements Pizza {
      */
     @Override
     public HashSet<PizzaIngredient> getIngredients() {
-        HashSet<PizzaIngredient> ingredients = new HashSet<PizzaIngredient>();
+        HashSet<PizzaIngredient> ingredients = new HashSet<>();
         ingredients.add(PizzaIngredient.TOMATO_SOUCE);
         ingredients.add(PizzaIngredient.GARLIC);
         ingredients.add(PizzaIngredient.TUNA);
