@@ -24,6 +24,13 @@ public class PizzaDeliveryService {
         this.pizzeriaService = thepizzeriaService;
     }
 
+    /**
+     * Method that returns current pizzeria service.
+     * @return current pizzeria service.
+     */
+    public PizzeriaService getPizzeriaService() {
+        return pizzeriaService;
+    }
 
     /**
      * Method for ordering pizza.

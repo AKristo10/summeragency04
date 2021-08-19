@@ -1,6 +1,7 @@
 package com.agency04.sbss.pizza;
 
 import com.agency04.sbss.pizza.model.BestPizzaPizzeriaService;
+import com.agency04.sbss.pizza.model.Customer;
 import com.agency04.sbss.pizza.model.MarinaraPizza;
 import com.agency04.sbss.pizza.model.TonnoPizza;
 import com.agency04.sbss.pizza.service.PizzaDeliveryService;

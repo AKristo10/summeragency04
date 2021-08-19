@@ -14,9 +14,21 @@ public class MarinaraPizza implements Pizza {
     @Value("Marinara Pizza")
     private String name;
 
+    @Value("Jumbo")
+    private String size;
+
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    @Override
+    public void setSize(String size) {
+        this.size = size;
     }
 
     /**
