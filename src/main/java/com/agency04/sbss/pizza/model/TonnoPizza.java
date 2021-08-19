@@ -1,14 +1,12 @@
 package com.agency04.sbss.pizza.model;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 
 /**
  * Class that represents tuna pizza
  */
-@Component
 public class TonnoPizza implements Pizza {
 
     @Value("Tono Pizza")
@@ -41,5 +39,16 @@ public class TonnoPizza implements Pizza {
         ingredients.add(PizzaIngredient.GARLIC);
         ingredients.add(PizzaIngredient.TUNA);
         return ingredients;
+    }
+
+    @Override
+    public void startStuffs() {
+        //which data to initialize??????
+        System.out.println("Post-Construct method");
+    }
+
+    @Override
+    public void endStuffs() {
+        System.out.println("Pre-destroy method");
     }
 }

@@ -1,6 +1,5 @@
-package com.agency04.sbss.pizza.service;
+package com.agency04.sbss.pizza.model;
 
-import com.agency04.sbss.pizza.model.Pizza;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -10,13 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ItalianaPizzeriaService implements PizzeriaService {
 
-
     @Value("${name.pizzeria}")
     private String namePizzeria;
 
     @Value("${address.pizzeria}")
     private String address;
-
 
     @Override
     public void setName(String namePizzeria) {

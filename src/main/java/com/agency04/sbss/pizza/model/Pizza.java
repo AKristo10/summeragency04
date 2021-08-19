@@ -27,4 +27,14 @@ public interface Pizza {
      * @return ingredients of Pizza.
      */
     HashSet<PizzaIngredient> getIngredients();
+
+    /**
+     * Method executes before creating the object, initialize data and print to console
+     */
+    void startStuffs();
+
+    /**
+     * Method executes before destroying the object and print to console
+     */
+    void endStuffs();
 }

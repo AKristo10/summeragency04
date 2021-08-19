@@ -1,13 +1,11 @@
-package com.agency04.sbss.pizza.service;
+package com.agency04.sbss.pizza.model;
 
-import com.agency04.sbss.pizza.model.Pizza;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 /**
  * Class represents BestPizza Pizzeria Service.
  */
-@Component
+
 public class BestPizzaPizzeriaService implements PizzeriaService {
 
     @Value("Best Pizza")

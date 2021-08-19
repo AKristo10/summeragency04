@@ -1,6 +1,4 @@
-package com.agency04.sbss.pizza.service;
-
-import com.agency04.sbss.pizza.model.Pizza;
+package com.agency04.sbss.pizza.model;
 
 /**
  * Interface that represents Pizzeria Service.
@@ -10,6 +8,7 @@ public interface PizzeriaService {
     /**
      * Method that set the name of Pizzeria Service
      */
+
     void setName(String namePizzeria);
 
     /**
