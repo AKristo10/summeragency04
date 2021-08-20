@@ -1,4 +1,4 @@
-package com.agency04.sbss.pizza.controller.customer;
+package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.controller.customer.exception.CustomerNotFoundException;
 import com.agency04.sbss.pizza.model.Customer;

@@ -4,7 +4,6 @@ import com.agency04.sbss.pizza.model.Pizza;
 import com.agency04.sbss.pizza.model.PizzeriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 /**
  * Represents Pizza Delivery Service
