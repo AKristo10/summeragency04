@@ -40,4 +40,10 @@ public class PizzaDeliveryService {
     public String orderPizza(Pizza pizza){
        return pizza.getName()  + " is in your order. Yummy :). Ingredients: " + pizza.getIngredients().toString() + " ";
     }
+
+    public String getInfo(){
+        return "The current pizzeria service is " + this.pizzeriaService.getName()
+                + ". Address of " + pizzeriaService.getName()
+                + " is " + pizzeriaService.getAddress();
+    }
 }

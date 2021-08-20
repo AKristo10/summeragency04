@@ -1,4 +1,4 @@
-package com.agency04.sbss.pizza.controller.customer;
+package com.agency04.sbss.pizza.controller.customer.exception;
 
 public class CustomerErrorResponse {
     private int status;
@@ -9,6 +9,14 @@ public class CustomerErrorResponse {
     public CustomerErrorResponse(int status, String message){
         this.status = status;
         this.message = message;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public void setStatus(int status) {

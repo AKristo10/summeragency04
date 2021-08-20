@@ -1,7 +1,6 @@
 package com.agency04.sbss.pizza.controller.delivery;
 
-import com.agency04.sbss.pizza.controller.customer.CustomerNotFoundException;
-import com.agency04.sbss.pizza.model.Customer;
+import com.agency04.sbss.pizza.dto.DeliveryOrderForm;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

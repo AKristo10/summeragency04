@@ -1,13 +1,11 @@
-package com.agency04.sbss.pizza.controller.customer;
+package com.agency04.sbss.pizza.controller.customer.exception;
 
-import com.agency04.sbss.pizza.controller.customer.CustomerErrorResponse;
-import com.agency04.sbss.pizza.controller.customer.CustomerNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-
+@ControllerAdvice
 public class CustomerRestExceptionHandler {
 
     @ExceptionHandler
@@ -16,7 +14,7 @@ public class CustomerRestExceptionHandler {
         err.setStatus(HttpStatus.NOT_FOUND.value());
         err.setMessage(exception.getMessage());
 
-        return new ResponseEntity<CustomerErrorResponse>(err, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
@@ -25,7 +23,7 @@ public class CustomerRestExceptionHandler {
         err.setStatus(HttpStatus.BAD_REQUEST.value());
         err.setMessage(exception.getMessage());
 
-        return new ResponseEntity<CustomerErrorResponse>(err, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }
 
 }

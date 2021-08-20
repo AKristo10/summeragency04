@@ -1,9 +1,7 @@
 package com.agency04.sbss.pizza.model;
 
-import com.agency04.sbss.pizza.PizzaConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +16,9 @@ public class BestPizzaPizzeriaService implements PizzeriaService {
 
     @Value("Unska 3")
     private String address;
+
+    @Autowired
+    MarinaraPizza marinaraPizza;
 
     @Override
     public void setName(String namePizzeria) {
@@ -46,10 +47,8 @@ public class BestPizzaPizzeriaService implements PizzeriaService {
 
     @Override
     public List<Pizza> getMenu() {
-        AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(PizzaConfig.class);
-        List<Pizza> menu = new ArrayList<Pizza>();
-        menu.add(context.getBean("marinaraPizza", Pizza.class));
+        List<Pizza> menu = new ArrayList<>();
+        menu.add(marinaraPizza);
         return menu;
     }
 }

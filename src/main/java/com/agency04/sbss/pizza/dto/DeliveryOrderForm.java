@@ -1,4 +1,4 @@
-package com.agency04.sbss.pizza.controller.delivery;
+package com.agency04.sbss.pizza.dto;
 
 import com.agency04.sbss.pizza.model.Customer;
 
