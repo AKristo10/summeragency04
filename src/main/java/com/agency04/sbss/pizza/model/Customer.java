@@ -16,6 +16,13 @@ public class Customer {
     public Customer(){}
 
     /**
+     * Constructor that set the value od username
+     * @param username
+     */
+    public Customer(String username){
+        this.username = username;
+    }
+    /**
      * Constructor that set values of username and password
      * @param username value of username
      * @param password value of password

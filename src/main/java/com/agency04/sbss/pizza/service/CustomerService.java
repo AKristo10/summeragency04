@@ -27,6 +27,11 @@ public class CustomerService {
      */
     public Customer addCustomer(Customer customer){
         if(customer != null) {
+            customers.forEach(customer1 -> {
+                if (customer1.getUsername().equals(customer.getUsername()) && customer1.getPassword().equals(customer.getPassword())){
+                    throw new CustomerNotFoundException("Customer has already added!");
+                }
+            });
             customers.add(customer);
             return customer;
         }
