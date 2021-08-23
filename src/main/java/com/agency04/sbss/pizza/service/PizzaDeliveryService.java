@@ -27,8 +27,6 @@ public class PizzaDeliveryService {
      * @return just added order
      */
     public DeliveryOrderForm addOrder(DeliveryOrderForm order){
-        System.out.println(order.getCustomerUsername());
-
         if(customerService.getCustomers().size() == 0){
             throw new CustomerNotFoundException("Customer " + order.getCustomerUsername() + " does not exist!");
         }
