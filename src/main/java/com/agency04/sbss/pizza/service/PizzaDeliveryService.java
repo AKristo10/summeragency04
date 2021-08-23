@@ -17,21 +17,33 @@ public class PizzaDeliveryService {
 
     private PizzeriaService pizzeriaService;
     private List<DeliveryOrderForm> orders = new ArrayList<>();
+    @Autowired
     private CustomerService customerService;
 
     /**
      * Method add the order to list
      * @param order order in list
+     * @throws CustomerNotFoundException if customer does not exist
      * @return just added order
      */
     public DeliveryOrderForm addOrder(DeliveryOrderForm order){
+        System.out.println(order.getCustomerUsername());
+
+        if(customerService.getCustomers().size() == 0){
+            throw new CustomerNotFoundException("Customer " + order.getCustomerUsername() + " does not exist!");
+        }
+
         customerService.getCustomers().stream().forEach(customer -> {
-            if(!customer.getUsername().equals(order.getCustomerUsername()))
+            if(!customer.getUsername().equals(order.getCustomerUsername())) {
                 throw new CustomerNotFoundException("Customer " + order.getCustomerUsername() + " does not exist!");
-            else
+            }
+            else {
                 orders.add(order);
+            }
+
         });
-        return order;
+        return  order;
+
     }
 
     /**
