@@ -14,6 +14,7 @@ public interface Pizza {
      */
     void setName(String name);
 
+    void setSize(String size);
     /**
      * Method that return name of Pizza.
      *

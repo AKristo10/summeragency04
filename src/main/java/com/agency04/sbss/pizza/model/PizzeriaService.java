@@ -1,5 +1,7 @@
 package com.agency04.sbss.pizza.model;
 
+import java.util.List;
+
 /**
  * Interface that represents Pizzeria Service.
  */
@@ -37,4 +39,23 @@ public interface PizzeriaService {
      * @param pizza
      */
     String makePizza(Pizza pizza);
+
+    /**
+     * Method that return menu of pizzeria
+     * @return  menu of pizzeria
+     */
+    List<Pizza> getMenu();
+
+    /**
+     * Default method that returns menu in String format.
+     * @return menu in String format.
+     */
+    default String getMenuString(){
+            String menuStr = "We can offer: ";
+            for(Pizza pizza : getMenu()){
+                menuStr += pizza.getName() + " ";
+            }
+            return menuStr;
+    }
+
 }

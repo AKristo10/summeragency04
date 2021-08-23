@@ -11,10 +11,25 @@ public class TonnoPizza implements Pizza {
 
     @Value("Tono Pizza")
     private String name;
+    @Value("Jumbo")
+    private String size;
 
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    /**
+     * Method that returns the size of pizza.
+     * @return
+     */
+    public String getSize() {
+        return size;
     }
 
     /**
