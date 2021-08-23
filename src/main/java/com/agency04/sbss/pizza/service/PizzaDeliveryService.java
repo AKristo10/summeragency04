@@ -2,8 +2,7 @@ package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.controller.customer.exception.CustomerNotFoundException;
 import com.agency04.sbss.pizza.dto.DeliveryOrderForm;
-import com.agency04.sbss.pizza.model.Pizza;
-import com.agency04.sbss.pizza.model.PizzeriaService;
+import com.agency04.sbss.pizza.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -18,6 +17,7 @@ public class PizzaDeliveryService {
 
     private PizzeriaService pizzeriaService;
     private List<DeliveryOrderForm> orders = new ArrayList<>();
+    private CustomerService customerService;
 
     /**
      * Method add the order to list
@@ -25,15 +25,12 @@ public class PizzaDeliveryService {
      * @return just added order
      */
     public DeliveryOrderForm addOrder(DeliveryOrderForm order){
-        boolean customerExists = false;
-        for(DeliveryOrderForm o : this.orders){
-            if(order.getCustomerUsername().equals(order.getCustomerUsername()))
-                customerExists = true;
-        }
-        if(!customerExists){
-            throw new CustomerNotFoundException("Customer " + order.getCustomerUsername() + " does not exist.");
-        }
-        orders.add(order);
+        customerService.getCustomers().stream().forEach(customer -> {
+            if(!customer.getUsername().equals(order.getCustomerUsername()))
+                throw new CustomerNotFoundException("Customer " + order.getCustomerUsername() + " does not exist!");
+            else
+                orders.add(order);
+        });
         return order;
     }
 
