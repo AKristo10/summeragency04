@@ -1,12 +1,14 @@
 package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.controller.customer.exception.CustomerNotFoundException;
-import com.agency04.sbss.pizza.dto.DeliveryOrderForm;
+import com.agency04.sbss.pizza.dao.PizzaOrderRepository;
+import com.agency04.sbss.pizza.dao.PizzaRepository;
+import com.agency04.sbss.pizza.dto.Pizza;
+import com.agency04.sbss.pizza.dto.PizzaOrder;
 import com.agency04.sbss.pizza.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,8 +17,14 @@ import java.util.List;
  */
 public class PizzaDeliveryService {
 
+    @Autowired
+    private PizzaRepository pizzaRepository;
+
+    @Autowired
+    private PizzaOrderRepository pizzaOrderRepository;
+
     private PizzeriaService pizzeriaService;
-    private List<DeliveryOrderForm> orders = new ArrayList<>();
+
     @Autowired
     private CustomerService customerService;
 
@@ -26,30 +34,18 @@ public class PizzaDeliveryService {
      * @throws CustomerNotFoundException if customer does not exist
      * @return just added order
      */
-    public DeliveryOrderForm addOrder(DeliveryOrderForm order){
-        if(customerService.getCustomers().size() == 0){
-            throw new CustomerNotFoundException("Customer " + order.getCustomerUsername() + " does not exist!");
-        }
-
-        customerService.getCustomers().stream().forEach(customer -> {
-            if(!customer.getUsername().equals(order.getCustomerUsername())) {
-                throw new CustomerNotFoundException("Customer " + order.getCustomerUsername() + " does not exist!");
-            }
-            else {
-                orders.add(order);
-            }
-
-        });
+    public PizzaOrder addOrder(PizzaOrder order){
+        //koje validacije bi ovdje trebala dodati?
+        pizzaOrderRepository.save(order);
         return  order;
-
     }
 
     /**
      * Method returns list of orders
      * @return list of orders
      */
-    public List<DeliveryOrderForm> getOrders() {
-        return orders;
+    public List<PizzaOrder> getOrders() {
+        return pizzaOrderRepository.findAll();
     }
 
     /**

@@ -1,22 +1,25 @@
 package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.controller.customer.exception.CustomerNotFoundException;
-import com.agency04.sbss.pizza.model.*;
+import com.agency04.sbss.pizza.dao.CustomerRepository;
+import com.agency04.sbss.pizza.dto.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.List;
 
 @Service
 public class CustomerService {
 
-    Set<Customer> customers = new HashSet<>();
+    @Autowired
+    private CustomerRepository customerRepository;
 
     /**
      * Method returns set of customers.
      * @return set of customers.
      */
-    public Set<Customer> getCustomers() {
-        return customers;
+    public List<Customer> getCustomers() {
+        return customerRepository.findAll();
     }
 
 
@@ -26,17 +29,16 @@ public class CustomerService {
      * @return just added customer
      */
     public Customer addCustomer(Customer customer){
-        if(customer != null) {
-            customers.forEach(customer1 -> {
-                if (customer1.getUsername().equals(customer.getUsername()) && customer1.getPassword().equals(customer.getPassword())){
+        if(customer != null){
+            customerRepository.findAll().forEach(c -> {
+                if(c.equals(customer))
                     throw new CustomerNotFoundException("Customer has already added!");
-                }
             });
-            customers.add(customer);
+            customerRepository.save(customer);
             return customer;
         }
         else
-            throw new NullPointerException();
+            throw new NullPointerException("Customer can not be null!");
     }
 
 
@@ -47,12 +49,11 @@ public class CustomerService {
      * @return Customer by username
      */
     public Customer getCustomerByUsername(String username){
-        Customer customerUsername = customers.stream().filter(customer -> username.equals(customer.getUsername()))
-                .findAny().orElse(null);
-        if(customerUsername == null)
+        Customer customer = customerRepository.findByUsername(username);
+        if(customer == null)
             throw  new CustomerNotFoundException("Customer " + username + " does not exist!");
         else
-            return customerUsername;
+            return customer;
     }
 
 
@@ -64,11 +65,12 @@ public class CustomerService {
      * @return updated customer
      */
     public Customer updateCustomerByUsername(String username, Customer customer){
-        Customer customerUsername = customers.stream().filter(c -> username.equals(c.getUsername()))
-                .findAny().orElse(null);
+        Customer customerUsername = customerRepository.findByUsername(username);
         if(customerUsername != null){
             customerUsername.setUsername(customer.getUsername());
-            customerUsername.setPassword(customer.getPassword());
+            customerUsername.setCustomerDetails(customer.getCustomerDetails());
+            customerUsername.setDelivery(customer.getDelivery());
+            customerRepository.save(customerUsername);
             return customerUsername;
         }
         else
@@ -82,15 +84,11 @@ public class CustomerService {
      * @return just deleted customer.
      * @throws CustomerNotFoundException if customer does not exist
      */
-    public Customer deleteCustomerByUsername(String username){
-        Customer deletedCustomer = customers.stream().filter(c -> username.equals(c.getUsername()))
-                .findAny().orElse(null);
+    public void deleteCustomerByUsername(String username){
 
-        if(deletedCustomer != null)
-            customers.remove(deletedCustomer);
-        else
-            throw  new CustomerNotFoundException("Customer " + username + " does not exist!");
 
-        return deletedCustomer;
+        customerRepository.delete(customerRepository.findByUsername(username));
+
+
     }
 }

@@ -1,5 +1,7 @@
 package com.agency04.sbss.pizza.model;
 
+import com.agency04.sbss.pizza.dto.Pizza;
+
 import java.util.List;
 
 /**
