@@ -1,6 +1,6 @@
 package com.agency04.sbss.pizza;
 
-import com.agency04.sbss.pizza.model.BestPizzaPizzeriaService;
+import com.agency04.sbss.pizza.service.BestPizzaPizzeriaService;
 import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import org.springframework.context.annotation.*;
 

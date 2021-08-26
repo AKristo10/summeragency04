@@ -5,7 +5,6 @@ import com.agency04.sbss.pizza.dao.PizzaOrderRepository;
 import com.agency04.sbss.pizza.dao.PizzaRepository;
 import com.agency04.sbss.pizza.dto.Pizza;
 import com.agency04.sbss.pizza.dto.PizzaOrder;
-import com.agency04.sbss.pizza.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -35,9 +34,15 @@ public class PizzaDeliveryService {
      * @return just added order
      */
     public PizzaOrder addOrder(PizzaOrder order){
-        //koje validacije bi ovdje trebala dodati?
-        pizzaOrderRepository.save(order);
-        return  order;
+        boolean onTheMenu = false;
+        for(Pizza pizza : pizzeriaService.getMenu()){
+            if(pizza.equals(order.getPizza().getName()))
+                onTheMenu = true;
+        }
+        if(onTheMenu)
+            return  order;
+        else
+            throw new IllegalArgumentException("Pizza is not on the menu!");
     }
 
     /**

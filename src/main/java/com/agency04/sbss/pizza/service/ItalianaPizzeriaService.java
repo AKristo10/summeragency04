@@ -1,21 +1,26 @@
-package com.agency04.sbss.pizza.model;
+package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.dto.Pizza;
+import com.agency04.sbss.pizza.model.PizzaIngredient;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class represents BestPizza Pizzeria Service.
+ * Class represents Italiana Pizzeria Service.
  */
+@Component
+public class ItalianaPizzeriaService implements PizzeriaService {
 
-public class BestPizzaPizzeriaService implements PizzeriaService {
-
-    @Value("Best Pizza")
+    @Value("${name.pizzeria}")
     private String namePizzeria;
 
-    @Value("Unska 3")
+    @Value("${address.pizzeria}")
     private String address;
+
+
 
     @Override
     public void setName(String namePizzeria) {
@@ -37,7 +42,7 @@ public class BestPizzaPizzeriaService implements PizzeriaService {
         return this.address;
     }
 
-    @Override
+
     public String makePizza(Pizza pizza) {
         return "Making pizza";
     }
@@ -45,12 +50,13 @@ public class BestPizzaPizzeriaService implements PizzeriaService {
     @Override
     public List<Pizza> getMenu() {
         List<Pizza> menu = new ArrayList<>();
-        Pizza carbonara = new Pizza();
-        carbonara.setName("carbonara");
-        carbonara.setIngredients(List.of(
-                PizzaIngredient.TOMATO_SAUCE, PizzaIngredient.BACON
+        Pizza marinara = new Pizza();
+        marinara.setName("marinara");
+        marinara.setIngredients(List.of(
+                PizzaIngredient.TOMATO_SAUCE, PizzaIngredient.BACON, PizzaIngredient.EGG
         ));
-        menu.add(carbonara);
+        menu.add(marinara);
         return menu;
     }
+
 }
