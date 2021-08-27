@@ -115,10 +115,12 @@ public class CustomerService {
      * @throws CustomerNotFoundException if customer does not exist
      */
     public void deleteCustomerByUsername(String username){
-
-
-        customerRepository.delete(customerRepository.findByUsername(username));
-
-
+        for(Customer customer : customerRepository.findAll()){
+            if(customer.getUsername().equals(username)){
+                customerRepository.delete(customerRepository.findByUsername(username));
+                return;
+            }
+        }
+        throw  new CustomerNotFoundException("Customer "+ username + " does not exist!");
     }
 }
