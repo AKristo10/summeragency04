@@ -1,4 +1,6 @@
-package com.agency04.sbss.pizza.model;
+package com.agency04.sbss.pizza.service;
+
+import com.agency04.sbss.pizza.dto.Pizza;
 
 import java.util.List;
 

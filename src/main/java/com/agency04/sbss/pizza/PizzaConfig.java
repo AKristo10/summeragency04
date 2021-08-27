@@ -1,8 +1,6 @@
 package com.agency04.sbss.pizza;
 
-import com.agency04.sbss.pizza.model.BestPizzaPizzeriaService;
-import com.agency04.sbss.pizza.model.MarinaraPizza;
-import com.agency04.sbss.pizza.model.TonnoPizza;
+import com.agency04.sbss.pizza.service.BestPizzaPizzeriaService;
 import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import org.springframework.context.annotation.*;
 
@@ -20,17 +18,6 @@ public class PizzaConfig {
     @Primary
     public BestPizzaPizzeriaService bestPizzaPizzeriaService() {
         return new BestPizzaPizzeriaService();
-    }
-
-    @Bean
-    @Primary
-    public MarinaraPizza marinaraPizza() {
-        return new MarinaraPizza();
-    }
-
-    @Bean
-    public TonnoPizza tonnoPizza() {
-        return new TonnoPizza();
     }
 
 }

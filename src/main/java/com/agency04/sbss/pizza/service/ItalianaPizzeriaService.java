@@ -1,6 +1,7 @@
-package com.agency04.sbss.pizza.model;
+package com.agency04.sbss.pizza.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.agency04.sbss.pizza.dto.Pizza;
+import com.agency04.sbss.pizza.model.PizzaIngredient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,8 +20,7 @@ public class ItalianaPizzeriaService implements PizzeriaService {
     @Value("${address.pizzeria}")
     private String address;
 
-    @Autowired
-    private TonnoPizza tonnoPizza;
+
 
     @Override
     public void setName(String namePizzeria) {
@@ -42,7 +42,7 @@ public class ItalianaPizzeriaService implements PizzeriaService {
         return this.address;
     }
 
-    @Override
+
     public String makePizza(Pizza pizza) {
         return "Making pizza";
     }
@@ -50,7 +50,12 @@ public class ItalianaPizzeriaService implements PizzeriaService {
     @Override
     public List<Pizza> getMenu() {
         List<Pizza> menu = new ArrayList<>();
-        menu.add(tonnoPizza);
+        Pizza marinara = new Pizza();
+        marinara.setName("marinara");
+        marinara.setIngredients(List.of(
+                PizzaIngredient.TOMATO_SAUCE, PizzaIngredient.BACON, PizzaIngredient.EGG
+        ));
+        menu.add(marinara);
         return menu;
     }
 

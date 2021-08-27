@@ -1,12 +1,14 @@
 package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.controller.customer.exception.CustomerNotFoundException;
-import com.agency04.sbss.pizza.dto.DeliveryOrderForm;
-import com.agency04.sbss.pizza.model.*;
+import com.agency04.sbss.pizza.dao.DeliveryRepository;
+import com.agency04.sbss.pizza.dao.PizzaOrderRepository;
+import com.agency04.sbss.pizza.dao.PizzaRepository;
+import com.agency04.sbss.pizza.dto.Pizza;
+import com.agency04.sbss.pizza.dto.PizzaOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,10 +17,19 @@ import java.util.List;
  */
 public class PizzaDeliveryService {
 
+    @Autowired
+    private PizzaRepository pizzaRepository;
+
+    @Autowired
+    private PizzaOrderRepository pizzaOrderRepository;
+
     private PizzeriaService pizzeriaService;
-    private List<DeliveryOrderForm> orders = new ArrayList<>();
+
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private DeliveryRepository deliveryRepository;
 
     /**
      * Method add the order to list
@@ -26,21 +37,25 @@ public class PizzaDeliveryService {
      * @throws CustomerNotFoundException if customer does not exist
      * @return just added order
      */
-    public DeliveryOrderForm addOrder(DeliveryOrderForm order){
-        if(customerService.getCustomers().size() == 0){
-            throw new CustomerNotFoundException("Customer " + order.getCustomerUsername() + " does not exist!");
+    public PizzaOrder addOrder(PizzaOrder order){
+        boolean onTheMenu = false;
+        for(Pizza pizza : pizzeriaService.getMenu()){
+            if(pizza.getName().equals(order.getPizza().getName()))
+                onTheMenu = true;
         }
+        if(onTheMenu) {
+            pizzaRepository.save(order.getPizza());
 
-        customerService.getCustomers().stream().forEach(customer -> {
-            if(!customer.getUsername().equals(order.getCustomerUsername())) {
-                throw new CustomerNotFoundException("Customer " + order.getCustomerUsername() + " does not exist!");
+            for(PizzaOrder pizzaOrder : order.getDelivery().getPizzaOrder()){
+                pizzaRepository.save(pizzaOrder.getPizza());
+                pizzaOrderRepository.save(pizzaOrder);
             }
-            else {
-                orders.add(order);
-            }
-
-        });
-        return  order;
+            deliveryRepository.save(order.getDelivery());
+            pizzaOrderRepository.save(order);
+            return order;
+        }
+        else
+            throw new IllegalArgumentException("Pizza is not on the menu!");
 
     }
 
@@ -48,8 +63,8 @@ public class PizzaDeliveryService {
      * Method returns list of orders
      * @return list of orders
      */
-    public List<DeliveryOrderForm> getOrders() {
-        return orders;
+    public List<PizzaOrder> getOrders() {
+        return pizzaOrderRepository.findAll();
     }
 
     /**

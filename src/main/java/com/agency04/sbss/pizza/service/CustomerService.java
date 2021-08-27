@@ -1,22 +1,34 @@
 package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.controller.customer.exception.CustomerNotFoundException;
-import com.agency04.sbss.pizza.model.*;
+import com.agency04.sbss.pizza.dao.*;
+import com.agency04.sbss.pizza.dto.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CustomerService {
 
-    Set<Customer> customers = new HashSet<>();
+    @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerDetailsRepository customerDetailsRepository;
+    @Autowired
+    private PizzaOrderRepository pizzaOrderRepository;
+    @Autowired
+    private DeliveryRepository deliveryRepository;
+    @Autowired
+    private PizzaRepository pizzaRepository;
 
     /**
      * Method returns set of customers.
      * @return set of customers.
      */
-    public Set<Customer> getCustomers() {
-        return customers;
+    public List<Customer> getCustomers() {
+        return customerRepository.findAll();
     }
 
 
@@ -26,17 +38,24 @@ public class CustomerService {
      * @return just added customer
      */
     public Customer addCustomer(Customer customer){
-        if(customer != null) {
-            customers.forEach(customer1 -> {
-                if (customer1.getUsername().equals(customer.getUsername()) && customer1.getPassword().equals(customer.getPassword())){
+        if(customer != null){
+            customerRepository.findAll().forEach(c -> {
+                if(c.equals(customer))
                     throw new CustomerNotFoundException("Customer has already added!");
-                }
             });
-            customers.add(customer);
+            customerDetailsRepository.save(customer.getCustomerDetails());
+            for(Delivery delivery : customer.getDelivery()){
+                for(PizzaOrder pizzaOrder : delivery.getPizzaOrder()){
+                    pizzaRepository.save(pizzaOrder.getPizza());
+                    pizzaOrderRepository.save(pizzaOrder);
+                }
+                deliveryRepository.save(delivery);
+            }
+            customerRepository.save(customer);
             return customer;
         }
         else
-            throw new NullPointerException();
+            throw new NullPointerException("Customer can not be null!");
     }
 
 
@@ -47,12 +66,11 @@ public class CustomerService {
      * @return Customer by username
      */
     public Customer getCustomerByUsername(String username){
-        Customer customerUsername = customers.stream().filter(customer -> username.equals(customer.getUsername()))
-                .findAny().orElse(null);
-        if(customerUsername == null)
+        Customer customer = customerRepository.findByUsername(username);
+        if(customer == null)
             throw  new CustomerNotFoundException("Customer " + username + " does not exist!");
         else
-            return customerUsername;
+            return customer;
     }
 
 
@@ -64,11 +82,25 @@ public class CustomerService {
      * @return updated customer
      */
     public Customer updateCustomerByUsername(String username, Customer customer){
-        Customer customerUsername = customers.stream().filter(c -> username.equals(c.getUsername()))
-                .findAny().orElse(null);
+        Customer customerUsername = customerRepository.findByUsername(username);
         if(customerUsername != null){
             customerUsername.setUsername(customer.getUsername());
-            customerUsername.setPassword(customer.getPassword());
+            customerDetailsRepository.save(customer.getCustomerDetails());
+            customerUsername.setCustomerDetails(customer.getCustomerDetails());
+            List<PizzaOrder> orders = new ArrayList<>();
+            List<Delivery> deliveries = new ArrayList<>();
+            for(Delivery delivery : customer.getDelivery()){
+                for(PizzaOrder pizzaOrder : delivery.getPizzaOrder()){
+                    pizzaRepository.save(pizzaOrder.getPizza());
+                    pizzaOrder.setPizza(pizzaOrder.getPizza());
+                    pizzaOrderRepository.save(pizzaOrder);
+                    orders.add(pizzaOrder);
+                }
+                delivery.setPizzaOrder(orders);
+                deliveryRepository.save(delivery);
+            }
+            customerUsername.setDelivery(deliveries);
+            customerRepository.save(customerUsername);
             return customerUsername;
         }
         else
@@ -82,15 +114,13 @@ public class CustomerService {
      * @return just deleted customer.
      * @throws CustomerNotFoundException if customer does not exist
      */
-    public Customer deleteCustomerByUsername(String username){
-        Customer deletedCustomer = customers.stream().filter(c -> username.equals(c.getUsername()))
-                .findAny().orElse(null);
-
-        if(deletedCustomer != null)
-            customers.remove(deletedCustomer);
-        else
-            throw  new CustomerNotFoundException("Customer " + username + " does not exist!");
-
-        return deletedCustomer;
+    public void deleteCustomerByUsername(String username){
+        for(Customer customer : customerRepository.findAll()){
+            if(customer.getUsername().equals(username)){
+                customerRepository.delete(customerRepository.findByUsername(username));
+                return;
+            }
+        }
+        throw  new CustomerNotFoundException("Customer "+ username + " does not exist!");
     }
 }
