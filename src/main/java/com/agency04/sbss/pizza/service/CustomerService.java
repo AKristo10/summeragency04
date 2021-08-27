@@ -1,11 +1,12 @@
 package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.controller.customer.exception.CustomerNotFoundException;
-import com.agency04.sbss.pizza.dao.CustomerRepository;
-import com.agency04.sbss.pizza.dto.Customer;
+import com.agency04.sbss.pizza.dao.*;
+import com.agency04.sbss.pizza.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,6 +14,14 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerDetailsRepository customerDetailsRepository;
+    @Autowired
+    private PizzaOrderRepository pizzaOrderRepository;
+    @Autowired
+    private DeliveryRepository deliveryRepository;
+    @Autowired
+    private PizzaRepository pizzaRepository;
 
     /**
      * Method returns set of customers.
@@ -34,6 +43,14 @@ public class CustomerService {
                 if(c.equals(customer))
                     throw new CustomerNotFoundException("Customer has already added!");
             });
+            customerDetailsRepository.save(customer.getCustomerDetails());
+            for(Delivery delivery : customer.getDelivery()){
+                for(PizzaOrder pizzaOrder : delivery.getPizzaOrder()){
+                    pizzaRepository.save(pizzaOrder.getPizza());
+                    pizzaOrderRepository.save(pizzaOrder);
+                }
+                deliveryRepository.save(delivery);
+            }
             customerRepository.save(customer);
             return customer;
         }
@@ -68,8 +85,21 @@ public class CustomerService {
         Customer customerUsername = customerRepository.findByUsername(username);
         if(customerUsername != null){
             customerUsername.setUsername(customer.getUsername());
+            customerDetailsRepository.save(customer.getCustomerDetails());
             customerUsername.setCustomerDetails(customer.getCustomerDetails());
-            customerUsername.setDelivery(customer.getDelivery());
+            List<PizzaOrder> orders = new ArrayList<>();
+            List<Delivery> deliveries = new ArrayList<>();
+            for(Delivery delivery : customer.getDelivery()){
+                for(PizzaOrder pizzaOrder : delivery.getPizzaOrder()){
+                    pizzaRepository.save(pizzaOrder.getPizza());
+                    pizzaOrder.setPizza(pizzaOrder.getPizza());
+                    pizzaOrderRepository.save(pizzaOrder);
+                    orders.add(pizzaOrder);
+                }
+                delivery.setPizzaOrder(orders);
+                deliveryRepository.save(delivery);
+            }
+            customerUsername.setDelivery(deliveries);
             customerRepository.save(customerUsername);
             return customerUsername;
         }

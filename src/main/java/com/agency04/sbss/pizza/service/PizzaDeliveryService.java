@@ -1,6 +1,7 @@
 package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.controller.customer.exception.CustomerNotFoundException;
+import com.agency04.sbss.pizza.dao.DeliveryRepository;
 import com.agency04.sbss.pizza.dao.PizzaOrderRepository;
 import com.agency04.sbss.pizza.dao.PizzaRepository;
 import com.agency04.sbss.pizza.dto.Pizza;
@@ -27,6 +28,9 @@ public class PizzaDeliveryService {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private DeliveryRepository deliveryRepository;
+
     /**
      * Method add the order to list
      * @param order order in list
@@ -36,13 +40,23 @@ public class PizzaDeliveryService {
     public PizzaOrder addOrder(PizzaOrder order){
         boolean onTheMenu = false;
         for(Pizza pizza : pizzeriaService.getMenu()){
-            if(pizza.equals(order.getPizza().getName()))
+            if(pizza.getName().equals(order.getPizza().getName()))
                 onTheMenu = true;
         }
-        if(onTheMenu)
-            return  order;
+        if(onTheMenu) {
+            pizzaRepository.save(order.getPizza());
+
+            for(PizzaOrder pizzaOrder : order.getDelivery().getPizzaOrder()){
+                pizzaRepository.save(pizzaOrder.getPizza());
+                pizzaOrderRepository.save(pizzaOrder);
+            }
+            deliveryRepository.save(order.getDelivery());
+            pizzaOrderRepository.save(order);
+            return order;
+        }
         else
             throw new IllegalArgumentException("Pizza is not on the menu!");
+
     }
 
     /**
